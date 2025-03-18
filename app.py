@@ -16,9 +16,12 @@ def create_app():
     from api.products import products_bp
     app.register_blueprint(products_bp)
 
+    from api.cart import cart_bp
+    app.register_blueprint(cart_bp)
+
     return app
 
 
 if __name__ == '__main__':
     app = create_app()
-    app.run()
+    app.run(host='0.0.0.0', port=5001)

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Корзина</h2>
+    {% if cart %}
+        <ul class="list-group">
+            {% for product_id, quantity in cart.items() %}
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Товар #{{ product_id }} ({{ quantity }} шт.)</span>
+                <button class="btn btn-danger btn-sm" onclick="removeFromCart({{ product_id }})">
+                    Удалить
+                </button>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Корзина пуста</p>
+    {% endif %}
+{% endblock %}
