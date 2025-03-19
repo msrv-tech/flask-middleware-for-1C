@@ -2,17 +2,34 @@
 
 {% block content %}
     <h2>Корзина</h2>
-    {% if cart %}
-        <ul class="list-group">
-            {% for product_id, quantity in cart.items() %}
-            <li class="list-group-item d-flex justify-content-between">
-                <span>Товар #{{ product_id }} ({{ quantity }} шт.)</span>
-                <button class="btn btn-danger btn-sm" onclick="removeFromCart({{ product_id }})">
-                    Удалить
-                </button>
-            </li>
-            {% endfor %}
-        </ul>
+    {% if products %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product_id, data in products.items() %}
+                    <tr id="product-{{ product_id }}">
+                        <td>{{ data.name }}</td>
+                        <td>{{ "%.2f"|format(data.price) }} руб.</td>
+                        <td>{{ data.quantity }}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm"
+                                    onclick="removeFromCart({{ product_id }})">
+                                Удалить
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
         <p>Корзина пуста</p>
     {% endif %}

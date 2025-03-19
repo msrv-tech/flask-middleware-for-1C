@@ -1,6 +1,12 @@
-.card {
-    transition: transform 0.2s;
+/* static/css/style.css */
+.table {
+    margin-top: 20px;
 }
-.card:hover {
-    transform: translateY(-5px);
+
+.btn-danger {
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    transform: scale(1.1);
 }

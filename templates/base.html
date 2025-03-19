@@ -10,7 +10,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">Магазин</a>
-            <a class="btn btn-light" href="/cart">Корзина ({{ session.get('cart', {})|length }})</a>
+            <a class="btn btn-light" href="/cart">
+                Корзина <span class="cart-count">{{ session.get('cart', {})|length }}</span>
+            </a>
         </div>
     </nav>
 

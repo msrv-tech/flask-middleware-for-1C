@@ -25,11 +25,23 @@ def create_app():
 
     @app.route('/cart')
     def cart():
+        from models import Product
         cart_items = session.get('cart', {})
-        return render_template('cart.html', cart=cart_items)
+
+        # Получаем полную информацию о товарах
+        products = {}
+        for product_id in cart_items.keys():
+            product = Product.query.get(int(product_id))
+            if product:
+                products[product_id] = {
+                    'name': product.name,
+                    'price': product.price,
+                    'quantity': cart_items[product_id]
+                }
+
+        return render_template('cart.html', products=products)
 
     return app
-
 
 if __name__ == '__main__':
     app = create_app()
