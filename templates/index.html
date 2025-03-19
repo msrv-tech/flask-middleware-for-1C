@@ -1,20 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Все товары</h2>
+<div class="container">
+    <h2 class="my-4">Все товары</h2>
     <div class="row">
         {% for product in products %}
         <div class="col-md-4 mb-4">
-            <div class="card">
+            <div class="card h-100">
+                {% if product.images %}
+                <img src="{{ url_for('static', filename='uploads/' + product.id|string + '/' + product.images[0].filename) }}"
+                     class="card-img-top product-thumbnail"
+                     alt="{{ product.name }}">
+                {% else %}
+                <div class="card-img-top no-image">Нет изображения</div>
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.price }} руб.</p>
-                    <button onclick="addToCart({{ product.id }})" class="btn btn-primary">
-                        В корзину
-                    </button>
+                    <p class="card-text">{{ product.price }} ₽</p>
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}"
+                       class="btn btn-primary">Подробнее</a>
+                    <button onclick="addToCart({{ product.id }})"
+                            class="btn btn-success">В корзину</button>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+</div>
 {% endblock %}

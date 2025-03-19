@@ -1,12 +1,29 @@
-/* static/css/style.css */
-.table {
-    margin-top: 20px;
+.product-thumbnail {
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-.btn-danger {
-    transition: all 0.3s ease;
+.product-thumbnail:hover {
+    transform: scale(1.05);
 }
 
-.btn-danger:hover {
-    transform: scale(1.1);
+.no-image {
+    height: 250px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+}
+
+.carousel-item img {
+    max-height: 500px;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .carousel-item img {
+        max-height: 300px;
+    }
 }

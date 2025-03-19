@@ -1,18 +1,23 @@
 from app import create_app
+from models import Product, ProductImage
 from extensions import db
-from models import Product
 
 app = create_app()
 
 with app.app_context():
-    db.create_all()
+    # Создаем тестовый товар
+    p = Product(
+        name="iPhone 15",
+        price=999.99,
+        description="Новый смартфон от Apple"
+    )
+    db.session.add(p)
+    db.session.commit()
 
-    # Добавление тестовых товаров
-    if not Product.query.first():
-        products = [
-            Product(name="iPhone 15", price=999.99),
-            Product(name="MacBook Pro", price=2499.99)
-        ]
-        db.session.add_all(products)
-        db.session.commit()
-        print("Added test products!")
+    # Добавляем изображения
+    images = [
+        ProductImage(filename="iphone1.jpg", product_id=p.id, is_main=True),
+        ProductImage(filename="iphone2.jpg", product_id=p.id)
+    ]
+    db.session.add_all(images)
+    db.session.commit()
